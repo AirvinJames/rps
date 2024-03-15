@@ -120,14 +120,17 @@ function generateBotMove() {
 
 // Function to update scores
 function updateScores(result) {
-    switch (result) {
+    switch(result) {
         case "draw":
+            showModal("It's a draw!");
             drawNum++;
             break;
         case "player":
+            showModal("Congratulations! You win!");
             playerScore++;
             break;
         case "bot":
+            showModal("Oops! You lose!");
             botScore++;
             break;
     }
@@ -200,20 +203,7 @@ buttons.forEach(button => {
 
         setTimeout(() => {
             let result = getWinner(playerMove, botMove);
-            switch(result) {
-                case "draw":
-                    showModal("It's a draw!");
-                    drawNum++;
-                    break;
-                case "player":
-                    showModal("Congratulations! You win!");
-                    playerScore++;
-                    break;
-                case "bot":
-                    showModal("Oops! You lose!");
-                    botScore++;
-                    break;
-            }
+            
             updateScores(result);
         }, 510);
     });
