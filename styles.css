@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@font-face {
+    font-family: 'VT220';
+    src: url('./assets/VT220-mod.ttf') format('truetype');
+}
+
+:root {
+    /* Colors */
+    --accent: #FFAF65;
+    --bold-color: #FF8700;
+    --background: #1a1f19;
+    --alt-bg: #00000070;
+    --error-accent: #e06151;
+    --saturated-error: #e0a198;
+    --saturated-accent: #ffecb7;
+}
+
+html {
+    background-image: url('./assets/crt_amber_bg.jpg');
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+body {
+    width: 100vw;
+    height: calc(100vh - 0.4rem);
+    height: 99.8vh;
+    margin: 0.1rem;
+    
+
+    display: flex;
+    justify-content: space-around;
+
+    overflow: hidden;
+
+
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    background: url('./assets/crt_amber_mask.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+p, h1, h2, h3 {
+    font-family: 'VT220', monospace;
+    color: var(--accent);
+    text-shadow: 0px 1px 4px rgba(255,175,101,0.45);
+    font-size: 1.5rem;
+}
+
+.screen {
+    width: 100%;
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    row-gap: 4rem;
+}
+
+.title-bar {
+    display: flex;
+    width: 100%;
+    padding-top: 1rem;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left, .right-wrapper {
+    display: flex;
+    font-size: 0.1rem;
+    font-family: '', monospace;
+    color: var(--accent);
+    text-shadow: 0px 1px 50px rgba(255, 175, 101, 0.582);
+    column-gap: 1rem;
+}
+
+.right-wrapper {
+    padding-right: 5rem;
+}
+
+.left {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.4rem;
+    padding-top: 1.5rem;
+    padding-left: 6rem;
+    font-weight: 800;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.right {
+    display: flex;
+    column-gap: 2rem;
+    padding: 0.1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    
+    border-bottom: 2px solid var(--bold-color);
+}
+
+.right p {
+    padding: 0;
+    font-size: 0.;
+    color: var(--bold-color);
+}
+
+.choices {
+    width: 50%;
+    display: flex;
+    align-items: last baseline;
+    justify-content: center;
+    column-gap: 5rem;
+    margin-top: 0.5rem;
+    padding: 2rem;
+    border-top: 1px solid var(--accent);
+}
+
+button {
+    all: unset;
+}
+
+.choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 80ms ease-in;
+    width: 13%;
+    border-radius: 20px;
+
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.choice p {
+    font-size: 2rem;
+    transition: 80ms ease-out;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.choice svg {
+    width: 6rem;
+    height: 6rem;
+}
+
+.choice:hover {
+    cursor: pointer;
+    background-color: #00000070;
+    > p {
+        color: var(--bold-color);
+        
+    }
+
+    > .icon path {
+        stroke: var(--bold-color);
+    }
+}
+
+.choice:active{
+    background-color: #000000b6;
+    transform: scale(95%);
+    > p {
+        color: var(--bold-color);
+        
+    }
+
+    > .icon path {
+        stroke: var(--bold-color)
+    };
+}
+
+button[disabled] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 80ms ease-in;
+    width: 13%;
+    border-radius: 20px;
+    opacity: 0.5;
+    cursor: no-drop;
+
+    > svg {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    > svg path {
+        stroke: var(--saturated-accent) !important;
+    }
+
+    > p {
+        color: var(--saturated-accent);
+        font-size: 2rem;
+        transition: 80ms ease-out;
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+    }
+    
+}
+
+button[disabled]:hover {
+    background: none;
+    > svg path {
+        stroke: var(--saturated-error);
+    }
+
+    > p {
+        color: var(--saturated-error);
+    }
+    
+    animation: horizontal-shaking 0.2s linear;
+}
+
+#game-screen {
+    width: 54%;
+    height: 28%;
+    border-top: 1px solid var(--accent);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20rem;
+}
+
+.player-wrapper, .bot-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    padding-top: 0;
+    margin-top: 4rem;
+
+    > p {
+        font-size: 2rem;
+        margin: 0;
+        padding: 0;
+        color: var(--bold-color);
+    }
+}
+
+.player, .bot {
+    height: fit-content;
+    transition: transform 0.2s ease-in;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 4; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: #00000080; 
+}
+  
+/* Modal Content/Box */
+.modal-content {
+    background-color: var(--bold-color);
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid var(--bold-color);
+    width: 40%; /* Could be more or less, depending on screen size */
+    text-align: center;
+}
+
+.modal-content p {
+    color: #131212;
+    text-shadow: 0px 1px 4px #1a1f19a1;
+    font-size: 3rem;
+}
+  
+  /* Close Button */
+.close {
+    color: var(--alt-bg);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes horizontal-shaking {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(5px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(5px) }
+}
+
+@keyframes disappear {
+    from { opacity: 1;}
+    to { opacity: 0;}
+}
+
+@keyframes reappear {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
