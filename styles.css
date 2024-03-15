@@ -281,6 +281,13 @@ button[disabled]:hover {
     text-align: center;
 }
 
+.confetti {
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent);
+    position: absolute;
+}
+
 .modal-content p {
     color: #131212;
     text-shadow: 0px 1px 4px #1a1f19a1;

@@ -118,19 +118,69 @@ function generateBotMove() {
     return predictedMove;
 }
 
+// Function to trigger confetti effect
+// Function to create confetti particle
+function createConfetti() {
+    // Create a div for the confetti
+    let confetti = document.createElement("div");
+    confetti.className = "confetti";
+
+    // Set random position for the confetti
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+    confetti.style.top = -10 + "px";
+
+    // Set random rotation for the confetti
+    confetti.style.transform = "rotate(" + Math.random() * 360 + "deg)";
+
+    // Append the confetti to the confetti container
+    document.getElementById("confetti-container").appendChild(confetti);
+
+    // Animate the confetti falling
+    let animation = confetti.animate([
+        { top: -10 + "px", opacity: 1 },
+        { top: window.innerHeight + "px", opacity: 0 }
+    ], {
+        duration: Math.random() * 2000 + 1000, // Random duration between 2000ms and 5000ms
+
+        delay: Math.random() * 500 // Random delay up to 500ms
+    });
+
+    // Remove the confetti after animation ends
+    animation.onfinish = () => {
+        confetti.remove();
+    };
+}
+
+// Function to trigger confetti effect
+function triggerConfetti() {
+    // Create multiple confetti particles
+    for (let i = 0; i < 150; i++) {
+        createConfetti();
+    }
+}
+
 // Function to update scores
 function updateScores(result) {
+    let audio;
     switch(result) {
         case "draw":
             showModal("It's a draw!");
-            drawNum++;
+            drawNum++; 
             break;
         case "player":
             showModal("Congratulations! You win!");
             playerScore++;
+            triggerConfetti();
+            audio = new Audio(`./assets/audio/win.mp3`);
+            audio.play();
+
             break;
         case "bot":
             showModal("Oops! You lose!");
+
+            audio = new Audio(`./assets/audio/error.mp3`);
+            audio.play();
+
             botScore++;
             break;
     }
