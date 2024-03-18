@@ -227,7 +227,6 @@ button[disabled]:hover {
 #game-screen {
     width: 54%;
     height: 28%;
-    border-top: 1px solid var(--accent);
 
     display: flex;
     flex-direction: row;
